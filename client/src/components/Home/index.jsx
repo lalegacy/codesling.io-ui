@@ -45,6 +45,7 @@ class Home extends Component {
     const { value } = e.target;
     let vi = JSON.parse(value).id;
     await this.setState({ selectedChallenge: value });
+    console.log('vi is ..', vi);
     const { data } = await axios.get(`http://localhost:3396/api/usersTests/${vi}`)
     console.log('here is yo data!!', data.rows);
     // this.setState({ respectiveTestCases: data})
