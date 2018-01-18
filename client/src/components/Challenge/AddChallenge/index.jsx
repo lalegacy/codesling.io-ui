@@ -13,7 +13,9 @@ class AddChallenge extends Component {
     content: '',
     difficulty: null,
     testCase: '',
-    testCasesArray: []
+    testCasesArray: [],
+    testType: '',
+    testTypeArray: []
    }
 
   submitChallenge = async (e) => {
@@ -35,11 +37,23 @@ class AddChallenge extends Component {
       const payload = {
         content: test,
         challenge_id: result.data.id,
-        output_type: 0
+        output_type: "output"
       }
       console.log('inside testCase map before await');
       const placeHolder = await axios.post('http://localhost:3396/api/testCases', payload);
       console.log('inside testCase map after await');
+    });
+
+    testCasesArray.forEach(async (type) => {
+      console.log('here is type', type);
+      const payload = {
+        content: type,
+        challenge_id: result.data.id,
+        output_type: "type"
+      }
+      console.log('inside testType map before await');
+      const placeHolder = await axios.post('http://localhost:3396/api/testCases', payload);
+      console.log('inside testType map after await');
     });
     
     this.props.history.push('/home');
@@ -47,10 +61,13 @@ class AddChallenge extends Component {
 
   pushToTestCases = (e) => {
     e.preventDefault();
-    const { testCase, testCasesArray } = this.state;
+    const { testCase, testCasesArray, testType, testTypeArray } = this.state;
     testCasesArray.push(testCase);
+    testCasesArray.push(testType);
     document.getElementsByName('testCase')[0].value = '';
+    document.getElementsByName('testType')[0].value = '';
     console.log(testCasesArray);
+    console.log(testTypeArray);
   }
 
   handleChallengeInput = (event) => {
@@ -86,6 +103,12 @@ class AddChallenge extends Component {
           <Input 
             name='testCase'
             type='testCase'
+            placeholder={'enter test cases'}
+            onChange={this.handleChallengeInput}
+          />
+          <Input 
+            name='testType'
+            type='testType'
             placeholder={'enter test cases'}
             onChange={this.handleChallengeInput}
           />
