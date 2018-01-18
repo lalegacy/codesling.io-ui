@@ -11,12 +11,14 @@ class AddChallenge extends Component {
   state = { 
     title: '',
     content: '',
-    difficulty: null
+    difficulty: null,
+    testCase: '',
+    testCasesArray: []
    }
 
   submitChallenge = async (e) => {
     e.preventDefault();
-    const { title, content, difficulty } = this.state;
+    const { title, content, difficulty, testCasesArray } = this.state;
     const id = localStorage.getItem('id');
     const body = {
       title,
@@ -25,8 +27,28 @@ class AddChallenge extends Component {
       user_id: id,
       type: 0
     }
+
     const result = await axios.post('http://localhost:3396/api/challenges', body);
+
+    testCasesArray.forEach(async (test) => {
+      const payload = {
+        content: test,
+        challenge_id: result.data.id
+      }
+      console.log('inside testCase map before await');
+      const placeHolder = await axios.post('http://localhost:3396/api/testCases', payload);
+      console.log('inside testCase map after await');
+    });
+    
     this.props.history.push('/home');
+  }
+
+  pushToTestCases = (e) => {
+    e.preventDefault();
+    const { testCase, testCasesArray } = this.state;
+    testCasesArray.push(testCase);
+    document.getElementsByName('testCase')[0].value = '';
+    console.log(testCasesArray);
   }
 
   handleChallengeInput = (event) => {
@@ -59,6 +81,18 @@ class AddChallenge extends Component {
             placeholder={'enter your difficulty'}
             onChange={this.handleChallengeInput}
             />
+          <Input 
+            name='testCase'
+            type='testCase'
+            placeholder={'enter test cases'}
+            onChange={this.handleChallengeInput}
+          />
+          <Button 
+            backgroundColor="gray"
+            color="red"
+            text="Add Test Case"
+            onClick={this.pushToTestCases}
+          />
           <Button
             backgroundColor="red"
             color="white"
