@@ -34,6 +34,7 @@ class AddChallenge extends Component {
       const payload = {
         content: test,
         challenge_id: result.data.id
+        // output_type
       }
       console.log('inside testCase map before await');
       const placeHolder = await axios.post('http://localhost:3396/api/testCases', payload);

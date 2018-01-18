@@ -12,7 +12,8 @@ let slingId;
 class Home extends Component {
   state = {
     allChallenges: [],
-    selectedChallenge: {}
+    selectedChallenge: {},
+    respectiveTestCases: []
    }
 
    async componentDidMount() {
@@ -39,10 +40,14 @@ class Home extends Component {
     this.props.history.push('/addChallenge');
   }
 
-  handleChallengeSelect = (e) => {
+ handleChallengeSelect = async (e) => {
     e.preventDefault();
     const { value } = e.target;
-    this.setState({ selectedChallenge: value });
+    let vi = JSON.parse(value).id;
+    await this.setState({ selectedChallenge: value });
+    const { data } = await axios.get(`http://localhost:3396/api/usersTests/${vi}`)
+    console.log('here is yo data!!', data.rows);
+    // this.setState({ respectiveTestCases: data})
   }
 
   render() {
