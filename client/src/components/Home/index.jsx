@@ -31,7 +31,8 @@ class Home extends Component {
     this.props.history.push({
       pathname: `/${slingId}`,
       state: {
-        challenge: this.state.selectedChallenge
+        challenge: this.state.selectedChallenge,
+        tests: this.state.respectiveTestCases
       }
     });
   }
@@ -48,7 +49,9 @@ class Home extends Component {
     console.log('vi is ..', vi);
     const { data } = await axios.get(`http://localhost:3396/api/usersTests/${vi}`)
     console.log('here is yo data!!', data.rows);
-    // this.setState({ respectiveTestCases: data})
+    await this.setState({ respectiveTestCases: data.rows})
+    console.log('yo, here is daaa stateeee', this.state.respectiveTestCases);
+
   }
 
   render() {
