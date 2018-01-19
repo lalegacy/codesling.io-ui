@@ -30,6 +30,8 @@ class AddChallenge extends Component {
       type: 0
     }
 
+    this.pushToTestCases(e);
+
     const result = await axios.post('http://localhost:3396/api/challenges', body);
 
     testCasesArray.forEach(async (test) => {
@@ -66,8 +68,8 @@ class AddChallenge extends Component {
     testTypeArray.push(testType);
     document.getElementsByName('testCase')[0].value = '';
     document.getElementsByName('testType')[0].value = '';
-    console.log(testCasesArray);
-    console.log(testTypeArray);
+    console.log('this is testCasesArray: ', testCasesArray);
+    console.log('this is testTypeArray: ', testTypeArray);
   }
 
   handleChallengeInput = (event) => {
@@ -85,38 +87,32 @@ class AddChallenge extends Component {
           <Input
             name='title'
             type='title'
-            placeholder={'enter title'}
+            placeholder={'Enter Title'}
             onChange={this.handleChallengeInput}
             />
           <Input
             name='content'
             type='content'
-            placeholder={'enter content'}
+            placeholder={'Enter Prompt'}
             onChange={this.handleChallengeInput}
             />
           <Input 
             name='difficulty'
             type='difficulty'
-            placeholder={'enter your difficulty'}
+            placeholder={'Enter Difficulty'}
             onChange={this.handleChallengeInput}
             />
           <Input 
             name='testCase'
             type='testCase'
-            placeholder={'enter test cases'}
+            placeholder={'Expected Output'}
             onChange={this.handleChallengeInput}
           />
           <Input 
             name='testType'
             type='testType'
-            placeholder={'enter test cases'}
+            placeholder={'Expected Output Type'}
             onChange={this.handleChallengeInput}
-          />
-          <Button 
-            backgroundColor="gray"
-            color="red"
-            text="Add Test Case"
-            onClick={this.pushToTestCases}
           />
           <Button
             backgroundColor="red"
