@@ -44,7 +44,7 @@ class AddChallenge extends Component {
       console.log('inside testCase map after await');
     });
 
-    testCasesArray.forEach(async (type) => {
+    testTypeArray.forEach(async (type) => {
       console.log('here is type', type);
       const payload = {
         content: type,
@@ -63,7 +63,7 @@ class AddChallenge extends Component {
     e.preventDefault();
     const { testCase, testCasesArray, testType, testTypeArray } = this.state;
     testCasesArray.push(testCase);
-    testCasesArray.push(testType);
+    testTypeArray.push(testType);
     document.getElementsByName('testCase')[0].value = '';
     document.getElementsByName('testType')[0].value = '';
     console.log(testCasesArray);
