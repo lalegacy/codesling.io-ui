@@ -32,10 +32,11 @@ class AddChallenge extends Component {
 
     testCasesArray.forEach(async (test) => {
       console.log('here is test', test);
+      let op = JSON.stringify('hello world')
       const payload = {
         content: test,
         challenge_id: result.data.id,
-        output_type: 0
+        output_type: 'fifty'
       }
       console.log('inside testCase map before await');
       const placeHolder = await axios.post('http://localhost:3396/api/testCases', payload);
