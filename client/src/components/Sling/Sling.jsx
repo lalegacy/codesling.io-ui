@@ -97,7 +97,7 @@ class Sling extends Component {
             />
         </div>
         <div className="stdout-container">
-            {JSON.stringify(this.state.tests) || JSON.stringify(this.props.tests)}
+            {JSON.stringify(this.props.tests)}
             <br/>
             {this.state.challenge.title || this.props.challenge.title}
             <br/>

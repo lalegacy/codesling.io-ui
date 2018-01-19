@@ -34,7 +34,6 @@ class AddChallenge extends Component {
 
     testCasesArray.forEach(async (test) => {
       console.log('here is test', test);
-      let op = JSON.stringify('hello world')
       const payload = {
         content: test,
         challenge_id: result.data.id,
