@@ -20,7 +20,7 @@ class AddChallenge extends Component {
 
   submitChallenge = async (e) => {
     e.preventDefault();
-    const { title, content, difficulty, testCasesArray } = this.state;
+    const { title, content, difficulty, testCasesArray, testTypeArray } = this.state;
     const id = localStorage.getItem('id');
     const body = {
       title,
