@@ -50,9 +50,9 @@ class Sling extends Component {
       }
     });
 
-    socket.on('server.run', ({ stdout, email }) => {
+    socket.on('server.run', async ({ stdout, email }) => {
       const ownerEmail = localStorage.getItem('email');
-      email === ownerEmail ? this.setState({ stdout }) : null;
+      email === ownerEmail ? await this.setState({ stdout }) : null;
     });
 
     window.addEventListener('resize', this.setEditorSize);
