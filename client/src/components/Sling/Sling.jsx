@@ -53,19 +53,6 @@ class Sling extends Component {
     socket.on('server.run', async ({ stdout, email }) => {
       const ownerEmail = localStorage.getItem('email');
       email === ownerEmail ? await this.setState({ stdout }) : null;
-      console.log('here is typeof state.stdout', typeof (this.state.stdout), 'value is ', this.state.stdout);
-      console.log('here is props.test', this.props.tests[0]['content']);
-      /* Array case */
-      // for (let i = 0; i < JSON.parse(this.state.stdout).length; i++) {
-      //   console.log('here is arr stdout[i]', JSON.parse(this.state.stdout)[i]);
-      //   console.log('here is props.tests[i]', JSON.parse(this.props.tests[0]['content'])[i]);
-      //   console.log('at index: ', i, ' the elements equal: ', JSON.parse(this.state.stdout)[i] === JSON.parse(this.props.tests[0]['content'])[i]);
-      // }
-      for (let i = 0; i < (this.state.stdout).keys; i++) {
-        console.log('here is key', (this.state.stdout).keys[i]);
-        // console.log('here is obj stdout[i]', JSON.parse(this.state.stdout)[JSON.parse(this.state.stdout).keys[i]]);
-        // console.log('here is obj props.tests[i]', JSON.parse(this.props.tests[0]['content'])[JSON.parse(this.state.stdout).keys[i]]);
-      }
     });
 
     window.addEventListener('resize', this.setEditorSize);
